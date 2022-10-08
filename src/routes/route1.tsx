@@ -1,10 +1,11 @@
 import Header from '../shared/header';
+import Table from '../shared/table';
 
 const Route1 = () => {
   return (
     <>
       <Header />
-      <div>route1</div>
+      <Table />
     </>
   );
 };
