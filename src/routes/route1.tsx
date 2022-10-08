@@ -1,9 +1,12 @@
-import React from 'react'
+import Header from '../shared/header';
 
 const Route1 = () => {
   return (
-    <div>route1</div>
-  )
-}
+    <>
+      <Header />
+      <div>route1</div>
+    </>
+  );
+};
 
-export default Route1
+export default Route1;

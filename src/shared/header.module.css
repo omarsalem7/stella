@@ -1,0 +1,5 @@
+.headerBtns {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+}
