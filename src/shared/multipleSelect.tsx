@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { FilterInputProps } from './filter.types';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,11 +19,7 @@ const MenuProps = {
   },
 };
 
-type MultiProps = {
-  columns: string[];
-};
-
-export default function MultipleSelect({ columns }: MultiProps) {
+export default function MultipleSelect({ columns }: FilterInputProps) {
   const [personName, setPersonName] = useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -48,10 +45,10 @@ export default function MultipleSelect({ columns }: MultiProps) {
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {columns.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {columns.map(({ field }) => (
+            <MenuItem key={field} value={field}>
+              <Checkbox checked={personName.indexOf(field) > -1} />
+              <ListItemText primary={field} />
             </MenuItem>
           ))}
         </Select>
