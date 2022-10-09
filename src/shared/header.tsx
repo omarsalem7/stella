@@ -6,36 +6,45 @@ import MultipleSelect from './multipleSelect';
 import CheckBoxsFilter from './checkBoxsFilter';
 import styles from './header.module.css';
 import { columns } from '../data/route1';
+import { filterColumns } from '../utils';
+import { columnsType } from './filter.types';
 
-const Header = () => {
+type HeaderPropType = {
+  handleFilters: (data: columnsType) => void;
+};
+
+const Header = ({ handleFilters }: HeaderPropType) => {
   const [openf, setOpenf] = useState(false);
   const [openc, setOpenc] = useState(false);
-
+  const [checks, setChecks] = useState<string[]>([]);
+  const handleChangeChecks = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setChecks((prev) => [...prev, value]);
+    } else {
+      setChecks(checks.filter((ch) => ch !== value));
+    }
+  };
   return (
     <div className={styles.headerBtns}>
       <button onClick={() => setOpenc(true)}>Customize display</button>
       <button onClick={() => setOpenf(true)}>Filter</button>
-      <Modal
-        open={openc}
-        onClose={() => setOpenc(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={openc} onClose={() => setOpenc(false)}>
         <Box sx={style}>
           <h2>customize modal</h2>
-          <CheckBoxsFilter columns={columns} />
+          <CheckBoxsFilter
+            handleChange={handleChangeChecks}
+            columns={columns}
+          />
           <div>
-            <Button onClick={() => setOpenc(false)}>Cancel</Button>
-            <Button>Ok</Button>
+            <Button onClick={() => handleFilters(columns)}>Reset</Button>
+            <Button onClick={() => handleFilters(filterColumns(checks))}>
+              Ok
+            </Button>
           </div>
         </Box>
       </Modal>
-      <Modal
-        open={openf}
-        onClose={() => setOpenf(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={openf} onClose={() => setOpenf(false)}>
         <Box sx={style}>
           <h2>filter modal</h2>
           <MultipleSelect columns={columns} />

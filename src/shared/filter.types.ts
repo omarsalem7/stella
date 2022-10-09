@@ -1,5 +1,7 @@
+export type columnsType = {
+  field: string;
+}[];
+
 export type FilterInputProps = {
-  columns: {
-    field: string;
-  }[];
+  columns: columnsType;
 };

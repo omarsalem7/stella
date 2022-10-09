@@ -1,15 +1,23 @@
-import { FilterInputProps } from './filter.types';
+import React, { useState } from 'react';
 
-const CheckBoxsFilter = ({ columns }: FilterInputProps) => {
+type CheckBoxsProps = {
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  columns: {
+    field: string;
+  }[];
+};
+
+const CheckBoxsFilter = ({ handleChange, columns }: CheckBoxsProps) => {
   return (
     <>
       {columns.map(({ field }) => (
         <div key={field}>
           <input
             type="checkbox"
-            name="checkbox"
+            name="checkbox_name"
+            onChange={handleChange}
             id={`checkbox_${field}`}
-            value="value"
+            value={field}
           />
           <label htmlFor={`checkbox_${field}`}>{field}</label>
         </div>
