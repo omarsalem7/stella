@@ -65,7 +65,7 @@ const Header = ({ handleFilters }: HeaderPropType) => {
           />
           <label htmlFor="checkbox_id">Save for later</label>
           <div>
-            <Button>Reset</Button>
+            <Button onClick={() => handleFilters(columns)}>Reset</Button>
             <Button onClick={() => handleFilters(filterColumns(multiChecks))}>
               Apply
             </Button>

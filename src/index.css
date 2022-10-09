@@ -5,3 +5,18 @@
 .links a {
   padding: 0 20px;
 }
+
+.mobile {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.mobile div:nth-child(3) {
+  display: none;
+}
+
+@media (max-width: 481px) {
+  .desktop {
+    display: none;
+  }
+}
