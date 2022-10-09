@@ -18,36 +18,26 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+type MultiProps = {
+  columns: string[];
+};
 
-export default function MultipleSelect() {
+export default function MultipleSelect({ columns }: MultiProps) {
   const [personName, setPersonName] = useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
+    setPersonName(typeof value === 'string' ? value.split(',') : value);
   };
 
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">
+          Filter columns
+        </InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
@@ -58,7 +48,7 @@ export default function MultipleSelect() {
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {columns.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={personName.indexOf(name) > -1} />
               <ListItemText primary={name} />

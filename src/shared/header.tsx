@@ -3,7 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import MultipleSelect from './multipleSelect';
+import CheckBoxsFilter from './checkBoxsFilter';
 import styles from './header.module.css';
+import { columns } from '../data/route1';
 
 const Header = () => {
   const [openf, setOpenf] = useState(false);
@@ -21,8 +23,11 @@ const Header = () => {
       >
         <Box sx={style}>
           <h2>customize modal</h2>
-          <Button onClick={() => setOpenc(false)}>Cancel</Button>
-          <Button>Ok</Button>
+          <CheckBoxsFilter columns={columns} />
+          <div>
+            <Button onClick={() => setOpenc(false)}>Cancel</Button>
+            <Button>Ok</Button>
+          </div>
         </Box>
       </Modal>
       <Modal
@@ -33,9 +38,18 @@ const Header = () => {
       >
         <Box sx={style}>
           <h2>filter modal</h2>
-          <MultipleSelect />
-          <Button onClick={() => setOpenf(false)}>Cancel</Button>
-          <Button>Ok</Button>
+          <MultipleSelect columns={columns} />
+          <input
+            type="checkbox"
+            name="checkbox"
+            id="checkbox_id"
+            value="value"
+          />
+          <label htmlFor="checkbox_id">Save for later</label>
+          <div>
+            <Button>Reset</Button>
+            <Button>Apply</Button>
+          </div>
         </Box>
       </Modal>
     </div>
