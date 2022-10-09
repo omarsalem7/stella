@@ -15,8 +15,8 @@
   display: none;
 }
 
-@media (max-width: 481px) {
-  .desktop {
+@media (min-width: 640px) {
+  .mobile {
     display: none;
   }
 }

@@ -1,10 +1,19 @@
-import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import { rows } from '../data/route1';
 import { FilterInputProps } from './filter.types';
+import { columnsType } from './filter.types';
 
-export default function Table({ columns }: FilterInputProps) {
+type TableProps = {
+  columns: columnsType;
+  rows: {
+    id: number;
+    A1: string;
+    A2: string;
+    A3: string;
+  }[];
+};
+
+export default function Table({ columns, rows }: TableProps) {
   return (
     <>
       <div className="mobile">
