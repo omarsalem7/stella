@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -26,9 +26,17 @@ const Header = ({ handleFilters }: HeaderPropType) => {
       setChecks(checks.filter((ch) => ch !== value));
     }
   };
-  useEffect(() => {}, [multiChecks]);
   const handleMultiCheck = (data: string[]) => {
     setMultiChecks(data);
+  };
+
+  const handleStorage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    if (checked) {
+      localStorage.setItem('filters', JSON.stringify(multiChecks));
+    } else {
+      localStorage.removeItem('filters');
+    }
   };
 
   return (
@@ -62,6 +70,7 @@ const Header = ({ handleFilters }: HeaderPropType) => {
             name="checkbox"
             id="checkbox_id"
             value="value"
+            onChange={handleStorage}
           />
           <label htmlFor="checkbox_id">Save for later</label>
           <div>

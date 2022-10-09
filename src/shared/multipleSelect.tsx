@@ -25,6 +25,8 @@ type MultiProps = {
   }[];
 };
 
+let checkStorage = localStorage.getItem('filters');
+let storage = checkStorage ? JSON.parse(checkStorage) : [];
 export default function MultipleSelect({
   columns,
   handleMultiCheck,
@@ -40,6 +42,9 @@ export default function MultipleSelect({
   useEffect(() => {
     handleMultiCheck(multi);
   }, [multi]);
+  useEffect(() => {
+    setMulti(storage);
+  }, [storage]);
 
   return (
     <div>
