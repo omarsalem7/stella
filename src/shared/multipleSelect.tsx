@@ -42,6 +42,7 @@ export default function MultipleSelect({
   useEffect(() => {
     handleMultiCheck(multi);
   }, [multi]);
+  
   useEffect(() => {
     setMulti(storage);
   }, [storage]);
