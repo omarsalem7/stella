@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -17,6 +17,7 @@ const Header = ({ handleFilters }: HeaderPropType) => {
   const [openf, setOpenf] = useState(false);
   const [openc, setOpenc] = useState(false);
   const [checks, setChecks] = useState<string[]>([]);
+  const [multiChecks, setMultiChecks] = useState<string[]>([]);
   const handleChangeChecks = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     if (checked) {
@@ -25,6 +26,11 @@ const Header = ({ handleFilters }: HeaderPropType) => {
       setChecks(checks.filter((ch) => ch !== value));
     }
   };
+  useEffect(() => {}, [multiChecks]);
+  const handleMultiCheck = (data: string[]) => {
+    setMultiChecks(data);
+  };
+
   return (
     <div className={styles.headerBtns}>
       <button onClick={() => setOpenc(true)}>Customize display</button>
@@ -47,7 +53,10 @@ const Header = ({ handleFilters }: HeaderPropType) => {
       <Modal open={openf} onClose={() => setOpenf(false)}>
         <Box sx={style}>
           <h2>filter modal</h2>
-          <MultipleSelect columns={columns} />
+          <MultipleSelect
+            handleMultiCheck={handleMultiCheck}
+            columns={columns}
+          />
           <input
             type="checkbox"
             name="checkbox"
@@ -57,7 +66,9 @@ const Header = ({ handleFilters }: HeaderPropType) => {
           <label htmlFor="checkbox_id">Save for later</label>
           <div>
             <Button>Reset</Button>
-            <Button>Apply</Button>
+            <Button onClick={() => handleFilters(filterColumns(multiChecks))}>
+              Apply
+            </Button>
           </div>
         </Box>
       </Modal>

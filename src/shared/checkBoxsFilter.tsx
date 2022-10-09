@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 type CheckBoxsProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

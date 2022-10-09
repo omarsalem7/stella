@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,7 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import { FilterInputProps } from './filter.types';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,15 +18,28 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelect({ columns }: FilterInputProps) {
-  const [personName, setPersonName] = useState<string[]>([]);
+type MultiProps = {
+  handleMultiCheck: (data: string[]) => void;
+  columns: {
+    field: string;
+  }[];
+};
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+export default function MultipleSelect({
+  columns,
+  handleMultiCheck,
+}: MultiProps) {
+  const [multi, setMulti] = useState<string[]>([]);
+
+  const handleChange = (event: SelectChangeEvent<typeof multi>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(typeof value === 'string' ? value.split(',') : value);
+    setMulti(typeof value === 'string' ? value.split(',') : value);
   };
+  useEffect(() => {
+    handleMultiCheck(multi);
+  }, [multi]);
 
   return (
     <div>
@@ -39,7 +51,7 @@ export default function MultipleSelect({ columns }: FilterInputProps) {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={multi}
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(', ')}
@@ -47,7 +59,7 @@ export default function MultipleSelect({ columns }: FilterInputProps) {
         >
           {columns.map(({ field }) => (
             <MenuItem key={field} value={field}>
-              <Checkbox checked={personName.indexOf(field) > -1} />
+              <Checkbox checked={multi.indexOf(field) > -1} />
               <ListItemText primary={field} />
             </MenuItem>
           ))}
