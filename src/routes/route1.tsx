@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../shared/header';
 import Table from '../shared/table';
 import { columnsType } from '../shared/filter.types';
@@ -10,9 +10,12 @@ const Route1 = () => {
     setFilter(data);
   };
 
+  useEffect(() => {}, [filter]);
+
   return (
     <>
-      <Header handleFilters={handleFilters} />
+      {/* <Header handleFilters={handleFilters} showData={filter} /> */}
+      <Header filter={filter} handleFilters={handleFilters} />
       <Table rows={rows} columns={filter} />
     </>
   );

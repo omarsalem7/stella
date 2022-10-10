@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import { FilterInputProps } from './filter.types';
 import { columnsType } from './filter.types';
 
 type TableProps = {
@@ -14,6 +13,9 @@ type TableProps = {
 };
 
 export default function Table({ columns, rows }: TableProps) {
+  // console.log('*********start**********');
+  // console.log(columns);
+  // console.log('*********end**********');
   return (
     <>
       <div className="mobile">

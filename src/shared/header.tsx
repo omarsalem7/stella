@@ -6,14 +6,15 @@ import MultipleSelect from './multipleSelect';
 import CheckBoxsFilter from './checkBoxsFilter';
 import styles from './header.module.css';
 import { columns } from '../data/route1';
-import { filterColumns } from '../utils';
+import { filterColumns, arrayRotate } from '../utils';
 import { columnsType } from './filter.types';
 
 type HeaderPropType = {
   handleFilters: (data: columnsType) => void;
+  filter: columnsType;
 };
 
-const Header = ({ handleFilters }: HeaderPropType) => {
+const Header = ({ handleFilters, filter }: HeaderPropType) => {
   const [openf, setOpenf] = useState(false);
   const [openc, setOpenc] = useState(false);
   const [checks, setChecks] = useState<string[]>([]);
@@ -45,11 +46,29 @@ const Header = ({ handleFilters }: HeaderPropType) => {
       <button onClick={() => setOpenf(true)}>Filter</button>
       <Modal open={openc} onClose={() => setOpenc(false)}>
         <Box sx={style}>
-          <h2>customize modal</h2>
-          <CheckBoxsFilter
-            handleChange={handleChangeChecks}
-            columns={columns}
-          />
+          <h2>Customize Modal</h2>
+          <div className={styles.formHandler}>
+            <CheckBoxsFilter
+              handleChange={handleChangeChecks}
+              columns={columns}
+            />
+            <div className={styles.btnNavigation}>
+              <button
+                onClick={() => {
+                  handleFilters([...arrayRotate(filter)]);
+                }}
+              >
+                Up
+              </button>
+              <button
+                onClick={() => {
+                  handleFilters([...arrayRotate(filter, true)]);
+                }}
+              >
+                Down
+              </button>
+            </div>
+          </div>
           <div>
             <Button onClick={() => handleFilters(columns)}>Reset</Button>
             <Button onClick={() => handleFilters(filterColumns(checks))}>
@@ -60,7 +79,7 @@ const Header = ({ handleFilters }: HeaderPropType) => {
       </Modal>
       <Modal open={openf} onClose={() => setOpenf(false)}>
         <Box sx={style}>
-          <h2>filter modal</h2>
+          <h2>Filter Modal</h2>
           <MultipleSelect
             handleMultiCheck={handleMultiCheck}
             columns={columns}

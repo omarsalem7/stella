@@ -8,13 +8,14 @@ type CheckBoxsProps = {
 };
 
 const CheckBoxsFilter = ({ handleChange, columns }: CheckBoxsProps) => {
+  console.log(columns);
   return (
-    <>
+    <div>
       {columns.map(({ field }) => (
         <div key={field}>
           <input
             type="checkbox"
-            name="checkbox_name"
+            name={field}
             onChange={handleChange}
             id={`checkbox_${field}`}
             value={field}
@@ -22,7 +23,7 @@ const CheckBoxsFilter = ({ handleChange, columns }: CheckBoxsProps) => {
           <label htmlFor={`checkbox_${field}`}>{field}</label>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
