@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import MultipleSelect from './multipleSelect';
 import CheckBoxsFilter from './checkBoxsFilter';
 import styles from './header.module.css';
-// import { columnsA, columnsB } from '../data/routesData';
 import { filterColumns, arrayRotate } from '../utils';
 import { columnsType } from './filter.types';
 
@@ -16,6 +16,7 @@ type HeaderPropType = {
 };
 
 const Header = ({ handleFilters, filter, columns }: HeaderPropType) => {
+  const location = useLocation();
   const [openf, setOpenf] = useState(false);
   const [openc, setOpenc] = useState(false);
   const [checks, setChecks] = useState<string[]>([]);
@@ -35,9 +36,10 @@ const Header = ({ handleFilters, filter, columns }: HeaderPropType) => {
   const handleStorage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
     if (checked) {
-      localStorage.setItem('filters', JSON.stringify(multiChecks));
+      localStorage.setItem(location.pathname, JSON.stringify(multiChecks));
     } else {
-      localStorage.removeItem('filters');
+      localStorage.removeItem(location.pathname);
+      // localStorage.removeItem(location.pathname);
     }
   };
 

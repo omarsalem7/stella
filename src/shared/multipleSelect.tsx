@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -26,14 +27,16 @@ type MultiProps = {
   }[];
 };
 
-let checkStorage = localStorage.getItem('filters');
-let storage = checkStorage ? JSON.parse(checkStorage) : [];
+let checkStorage1 = localStorage.getItem('/route1');
+let checkStorage2 = localStorage.getItem('/route2');
+let storage1 = checkStorage1 ? JSON.parse(checkStorage1) : [];
+let storage2 = checkStorage2 ? JSON.parse(checkStorage2) : [];
 export default function MultipleSelect({
   columns,
   handleMultiCheck,
 }: MultiProps) {
   const [multi, setMulti] = useState<string[]>([]);
-
+  const location = useLocation();
   const handleChange = (event: SelectChangeEvent<typeof multi>) => {
     const {
       target: { value },
@@ -45,8 +48,9 @@ export default function MultipleSelect({
   }, [multi]);
 
   useEffect(() => {
-    setMulti(storage);
-  }, [storage]);
+    if (location.pathname === '/route1') setMulti(storage1);
+    if (location.pathname === '/route2') setMulti(storage2);
+  }, [storage1]);
 
   return (
     <div>
