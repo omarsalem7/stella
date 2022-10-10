@@ -50,8 +50,6 @@ $ npm run dev
 - LinkedIn: [Omar Salem](https://www.linkedin.com/in/omarsalem7)
 - Twitter: [Omar Salem](https://twitter.com/Omar80491499)
 
-<br/>
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
