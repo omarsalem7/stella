@@ -8,7 +8,6 @@ type CheckBoxsProps = {
 };
 
 const CheckBoxsFilter = ({ handleChange, columns }: CheckBoxsProps) => {
-  console.log(columns);
   return (
     <div>
       {columns.map(({ field }) => (
