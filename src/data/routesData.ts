@@ -19,6 +19,10 @@ export const columnsB = [
     field: 'A3',
     headerName: 'B3',
   },
+  {
+    field: 'A4',
+    headerName: 'B4',
+  },
 ];
 
 export const rowsA = [
@@ -27,7 +31,7 @@ export const rowsA = [
   { id: 3, A1: 'Lannister', A2: 'aaa', A3: '55666' },
 ];
 export const rowsB = [
-  { id: 1, A1: 'sss', A2: 'aaa', A3: 'lll' },
-  { id: 2, A1: 'lorem', A2: 'sss', A3: 'ffef' },
-  { id: 3, A1: 'koooo', A2: 'nnn', A3: 'kkk' },
+  { id: 1, A1: 'sss', A2: 'aaa', A3: 'lll', A4: 'dsa' },
+  { id: 2, A1: 'lorem', A2: 'sss', A3: 'ffef', A4: 'ccc' },
+  { id: 3, A1: 'koooo', A2: 'nnn', A3: 'kkk', A4: 'nnn' },
 ];
