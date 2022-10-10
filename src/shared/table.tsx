@@ -13,9 +13,6 @@ type TableProps = {
 };
 
 export default function Table({ columns, rows }: TableProps) {
-  // console.log('*********start**********');
-  // console.log(columns);
-  // console.log('*********end**********');
   return (
     <>
       <div className="mobile">

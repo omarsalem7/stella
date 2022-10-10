@@ -1,9 +1,8 @@
-import { columns } from './data/route1';
 import { columnsType } from './shared/filter.types';
 
-export const filterColumns = (values: string[]) =>
-  columns.filter((col) => {
-    if (values.includes(col.field)) {
+export const filterColumns = (arr: columnsType, values: string[]) =>
+  arr.filter((col) => {
+    if (values.includes(col.headerName)) {
       return col;
     }
   });

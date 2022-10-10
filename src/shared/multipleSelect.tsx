@@ -22,6 +22,7 @@ type MultiProps = {
   handleMultiCheck: (data: string[]) => void;
   columns: {
     field: string;
+    headerName: string;
   }[];
 };
 
@@ -42,7 +43,7 @@ export default function MultipleSelect({
   useEffect(() => {
     handleMultiCheck(multi);
   }, [multi]);
-  
+
   useEffect(() => {
     setMulti(storage);
   }, [storage]);
@@ -59,14 +60,14 @@ export default function MultipleSelect({
           multiple
           value={multi}
           onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
+          input={<OutlinedInput label="Filter columns" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {columns.map(({ field }) => (
-            <MenuItem key={field} value={field}>
-              <Checkbox checked={multi.indexOf(field) > -1} />
-              <ListItemText primary={field} />
+          {columns.map(({ headerName }) => (
+            <MenuItem key={headerName} value={headerName}>
+              <Checkbox checked={multi.indexOf(headerName) > -1} />
+              <ListItemText primary={headerName} />
             </MenuItem>
           ))}
         </Select>

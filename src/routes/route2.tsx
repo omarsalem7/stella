@@ -1,20 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from '../shared/header';
 import Table from '../shared/table';
 import { columnsType } from '../shared/filter.types';
-import { columns, rows } from '../data/route1';
+import { columnsB, rowsB } from '../data/routesData';
 
 const Route2 = () => {
-  const [filter, setFilter] = useState<columnsType>(columns);
+  const [filter, setFilter] = useState<columnsType>(columnsB);
   const handleFilters = (data: columnsType) => {
     setFilter(data);
   };
 
   return (
     <>
-      {/* <Header handleFilters={handleFilters} showData={filter} /> */}
-      <Header filter={filter} handleFilters={handleFilters} />
-      <Table rows={rows} columns={filter} />
+      <Header
+        filter={filter}
+        columns={columnsB}
+        handleFilters={handleFilters}
+      />
+      <Table rows={rowsB} columns={filter} />
     </>
   );
 };

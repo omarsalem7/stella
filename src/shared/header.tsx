@@ -5,16 +5,17 @@ import Modal from '@mui/material/Modal';
 import MultipleSelect from './multipleSelect';
 import CheckBoxsFilter from './checkBoxsFilter';
 import styles from './header.module.css';
-import { columns } from '../data/route1';
+// import { columnsA, columnsB } from '../data/routesData';
 import { filterColumns, arrayRotate } from '../utils';
 import { columnsType } from './filter.types';
 
 type HeaderPropType = {
   handleFilters: (data: columnsType) => void;
   filter: columnsType;
+  columns: columnsType;
 };
 
-const Header = ({ handleFilters, filter }: HeaderPropType) => {
+const Header = ({ handleFilters, filter, columns }: HeaderPropType) => {
   const [openf, setOpenf] = useState(false);
   const [openc, setOpenc] = useState(false);
   const [checks, setChecks] = useState<string[]>([]);
@@ -71,7 +72,9 @@ const Header = ({ handleFilters, filter }: HeaderPropType) => {
           </div>
           <div>
             <Button onClick={() => handleFilters(columns)}>Reset</Button>
-            <Button onClick={() => handleFilters(filterColumns(checks))}>
+            <Button
+              onClick={() => handleFilters(filterColumns(columns, checks))}
+            >
               Ok
             </Button>
           </div>
@@ -94,7 +97,9 @@ const Header = ({ handleFilters, filter }: HeaderPropType) => {
           <label htmlFor="checkbox_id">Save for later</label>
           <div>
             <Button onClick={() => handleFilters(columns)}>Reset</Button>
-            <Button onClick={() => handleFilters(filterColumns(multiChecks))}>
+            <Button
+              onClick={() => handleFilters(filterColumns(columns, multiChecks))}
+            >
               Apply
             </Button>
           </div>
