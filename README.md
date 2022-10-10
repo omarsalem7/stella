@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Stella-v1-yellow)
 
-# Social Media Application
+# Stella Stays 
 
 ## Live demo
 
