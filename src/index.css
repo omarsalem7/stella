@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+.links a {
+  padding: 0 20px;
+}
+
+.mobile {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.mobile div:nth-child(3) {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .mobile {
+    display: none;
+  }
+}
